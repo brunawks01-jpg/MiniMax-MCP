@@ -2,13 +2,8 @@
 import os
 from minimax_mcp.server import mcp
 
-def main():
-    port = int(os.environ.get("PORT", "10000"))
-    mcp.run(
-        transport="sse",
-        host="0.0.0.0",
-        port=port,
-    )
-
 if __name__ == "__main__":
-    main()
+    mcp.settings.host = "0.0.0.0"
+    mcp.settings.port = int(os.environ.get("PORT", "10000"))
+    mcp.settings.streamable_http_path = "/mcp"
+    mcp.run(transport="streamable-http")
